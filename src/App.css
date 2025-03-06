@@ -1,0 +1,42 @@
+/* Estilos personalizados para la aplicación */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos para el scroll */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00CC66;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00FF7F;
+}
+
+/* Animaciones personalizadas */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Estilos para el texto seleccionado */
+::selection {
+  background-color: rgba(0, 255, 127, 0.3);
+  color: #ffffff;
+}

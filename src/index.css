@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #0A0A0A;
+  color: #E0FFF0;
+  overflow-x: hidden;
+}
+
+/* Estilos personalizados */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-secondary font-semibold py-2 px-6 rounded-md transition-all hover:bg-accent hover:shadow-lg;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary text-primary font-semibold py-2 px-6 rounded-md transition-all hover:bg-primary/10;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-6 text-light relative;
+  }
+  
+  .section-title::after {
+    @apply content-[''] absolute left-0 -bottom-2 h-1 w-20 bg-primary;
+  }
+  
+  .card {
+    @apply bg-secondary/80 backdrop-blur-sm p-6 rounded-lg border border-primary/20 hover:border-primary/50 transition-all;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00CC66;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00FF7F;
+}
