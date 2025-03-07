@@ -2,6 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AI_ASSISTANT_CONFIG } from '../config/aiAssistant';
 import { FaRobot, FaTimes, FaChevronUp, FaPaperPlane } from 'react-icons/fa';
+import ReactMarkdown from 'react-markdown';
+
+const MarkdownComponents = {
+  p: ({node, ...props}) => <p className="text-dark/90 my-1" {...props} />,
+  strong: ({node, ...props}) => <strong className="text-dark font-bold" {...props} />,
+  h1: ({node, ...props}) => <h1 className="text-dark font-bold text-xl mt-2 mb-1" {...props} />,
+  h2: ({node, ...props}) => <h2 className="text-dark font-bold text-lg mt-2 mb-1" {...props} />,
+  h3: ({node, ...props}) => <h3 className="text-dark font-semibold text-base mt-2 mb-1" {...props} />,
+  ul: ({node, ...props}) => <ul className="list-disc pl-4 my-1" {...props} />,
+  li: ({node, ...props}) => <li className="text-dark/90 my-0.5" {...props} />,
+};
 
 const AIAssistant = () => {
   const { t } = useTranslation();
@@ -128,7 +139,9 @@ const AIAssistant = () => {
                           : 'bg-white text-dark/90 shadow-md mr-4 border border-gray-200'
                       } transform transition-all duration-300 hover:scale-[1.02]`}
                     >
-                      {message.content}
+                      <ReactMarkdown components={MarkdownComponents}>
+                        {message.content}
+                      </ReactMarkdown>
                     </div>
                   </div>
                 ))}
