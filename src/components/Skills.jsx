@@ -4,11 +4,14 @@ import {
   FaNodeJs, FaDatabase, FaGitAlt, FaFigma 
 } from 'react-icons/fa';
 import { SiTailwindcss, SiDjango, SiExpress, SiMongodb, SiPostgresql } from 'react-icons/si';
+import { useTranslation } from 'react-i18next';
 
 const Skills = () => {
+  const { t } = useTranslation();
+
   const skillCategories = [
     {
-      title: "Frontend",
+      title: t('skills.frontend'),
       skills: [
         { name: "React", icon: <FaReact size={40} />, level: 90 },
         { name: "JavaScript", icon: <FaJs size={40} />, level: 85 },
@@ -18,7 +21,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Backend",
+      title: t('skills.backend'),
       skills: [
         { name: "Node.js", icon: <FaNodeJs size={40} />, level: 80 },
         { name: "Express", icon: <SiExpress size={40} />, level: 75 },
@@ -35,7 +38,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Herramientas",
+      title: t('skills.tools'),
       skills: [
         { name: "Git", icon: <FaGitAlt size={40} />, level: 85 },
         { name: "Figma", icon: <FaFigma size={40} />, level: 75 },
@@ -71,9 +74,9 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="section-title mx-auto w-fit">Mis Habilidades</h2>
+          <h2 className="section-title mx-auto w-fit">{t('skills.title')}</h2>
           <p className="text-light/80 mt-6 max-w-3xl mx-auto">
-            Un conjunto de tecnologías y herramientas que domino para crear soluciones web completas y eficientes.
+            {t('skills.description')}
           </p>
         </motion.div>
 

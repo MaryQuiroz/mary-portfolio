@@ -4,23 +4,38 @@
       "home": "Inicio",
       "about": "Sobre mí",
       "projects": "Proyectos",
-      "contact": "Contacto"
+      "contact": "Contacto",
+      "skills": "Habilidades"
     },
     "hero": {
       "greeting": "¡Hola! Soy",
       "role": "Desarrolladora Web",
-      "description": "Apasionada por crear experiencias web atractivas y funcionales."
+      "description": "Apasionada por crear experiencias web atractivas y funcionales.",
+      "scrollDown": "Desplázate para descubrir"
     },
     "about": {
       "title": "Sobre mí",
-      "description": "Soy una desarrolladora web con experiencia en React, Node.js y diseño UI/UX. Me encanta resolver problemas y crear soluciones elegantes.",
-      "skills": "Habilidades",
-      "experience": "Experiencia"
+      "description": "Soy una desarrolladora web apasionada por crear soluciones digitales innovadoras y funcionales.",
+      "skills": "Desarrollo Web",
+      "skillsDescription": "Especializada en crear interfaces modernas y responsivas con React y aplicaciones backend robustas.",
+      "experience": "Formación",
+      "experienceDescription": "Graduada en Desarrollo Web Frontend en La Salle BCN y formación en IA y Machine Learning con Python.",
+      "collaboration": "Colaboración",
+      "collaborationDescription": "Experiencia en entornos Agile/Scrum, garantizando la entrega oportuna de proyectos de alta calidad.",
+      "fullstack": "Full Stack"
+    },
+    "skills": {
+      "title": "Habilidades",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Herramientas",
+      "description": "Mis habilidades técnicas y herramientas"
     },
     "projects": {
       "title": "Proyectos",
       "viewProject": "Ver proyecto",
-      "viewCode": "Ver código"
+      "viewCode": "Ver código",
+      "description": "Algunos de mis trabajos recientes"
     },
     "contact": {
       "title": "Contacto",
@@ -29,10 +44,14 @@
       "message": "Mensaje",
       "send": "Enviar",
       "success": "¡Mensaje enviado con éxito!",
-      "error": "Hubo un error al enviar el mensaje."
+      "error": "Hubo un error al enviar el mensaje.",
+      "description": "¿Tienes un proyecto en mente? ¡Hablemos!",
+      "getInTouch": "Ponte en contacto"
     },
     "footer": {
-      "rights": "Todos los derechos reservados"
+      "rights": "Todos los derechos reservados",
+      "madeWith": "Hecho con",
+      "by": "por"
     }
   }
 } 

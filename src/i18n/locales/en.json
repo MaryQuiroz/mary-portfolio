@@ -4,23 +4,38 @@
       "home": "Home",
       "about": "About",
       "projects": "Projects",
-      "contact": "Contact"
+      "contact": "Contact",
+      "skills": "Skills"
     },
     "hero": {
       "greeting": "Hello! I'm",
       "role": "Web Developer",
-      "description": "Passionate about creating engaging and functional web experiences."
+      "description": "Passionate about creating engaging and functional web experiences.",
+      "scrollDown": "Scroll to discover"
     },
     "about": {
       "title": "About Me",
-      "description": "I'm a web developer with experience in React, Node.js, and UI/UX design. I love solving problems and creating elegant solutions.",
-      "skills": "Skills",
-      "experience": "Experience"
+      "description": "I'm a web developer passionate about creating innovative and functional digital solutions.",
+      "skills": "Web Development",
+      "skillsDescription": "Specialized in creating modern and responsive interfaces with React and robust backend applications.",
+      "experience": "Education",
+      "experienceDescription": "Graduated in Frontend Web Development at La Salle BCN and trained in AI and Machine Learning with Python.",
+      "collaboration": "Collaboration",
+      "collaborationDescription": "Experience in Agile/Scrum environments, ensuring timely delivery of high-quality projects.",
+      "fullstack": "Full Stack"
+    },
+    "skills": {
+      "title": "Skills",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Tools",
+      "description": "My technical skills and tools"
     },
     "projects": {
       "title": "Projects",
       "viewProject": "View Project",
-      "viewCode": "View Code"
+      "viewCode": "View Code",
+      "description": "Some of my recent work"
     },
     "contact": {
       "title": "Contact",
@@ -29,10 +44,14 @@
       "message": "Message",
       "send": "Send",
       "success": "Message sent successfully!",
-      "error": "There was an error sending your message."
+      "error": "There was an error sending your message.",
+      "description": "Have a project in mind? Let's talk!",
+      "getInTouch": "Get in touch"
     },
     "footer": {
-      "rights": "All rights reserved"
+      "rights": "All rights reserved",
+      "madeWith": "Made with",
+      "by": "by"
     }
   }
 } 

@@ -1,79 +1,78 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const Projects = () => {
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('all');
   
   const projects = [
     {
       id: 1,
-      title: "Task Management App",
-      description: "Aplicación completa de gestión de tareas con autenticación, categorías y estadísticas.",
-      image: "https://via.placeholder.com/600x400/121212/00FF7F?text=Task+App",
-      tags: ["React", "Node.js", "MongoDB"],
-      category: "fullstack",
-      github: "https://github.com/maryquiroz/task-app",
-      demo: "https://task-app.maryquiroz.com",
+      title: "Portfolio Personal",
+      description: "Mi sitio web personal construido con React y Tailwind CSS, con animaciones fluidas y diseño responsivo.",
+      image: "/project1.jpg",
+      tags: ["React", "Tailwind CSS", "Framer Motion"],
+      category: "frontend",
+      github: "https://github.com/maryquiroz/portfolio",
+      demo: "https://maryquiroz.github.io/portfolio"
     },
     {
       id: 2,
       title: "E-commerce Dashboard",
-      description: "Panel de administración para tiendas online con análisis de ventas y gestión de inventario.",
-      image: "https://via.placeholder.com/600x400/121212/00FF7F?text=E-commerce",
-      tags: ["React", "Tailwind CSS", "Chart.js"],
-      category: "frontend",
+      description: "Panel de administración para una tienda online con análisis de datos, gestión de productos y usuarios.",
+      image: "/project2.jpg",
+      tags: ["React", "Node.js", "MongoDB", "Express"],
+      category: "fullstack",
       github: "https://github.com/maryquiroz/ecommerce-dashboard",
-      demo: "https://ecommerce.maryquiroz.com",
+      demo: "https://ecommerce-dashboard.vercel.app"
     },
     {
       id: 3,
-      title: "API RESTful",
-      description: "API completa para gestión de usuarios, productos y pedidos con autenticación JWT.",
-      image: "https://via.placeholder.com/600x400/121212/00FF7F?text=API+RESTful",
-      tags: ["Node.js", "Express", "MongoDB"],
-      category: "backend",
-      github: "https://github.com/maryquiroz/api-restful",
-      demo: "https://api.maryquiroz.com/docs",
+      title: "App de Gestión de Tareas",
+      description: "Aplicación para gestionar tareas con funcionalidades de arrastrar y soltar, filtros y estadísticas.",
+      image: "/project3.jpg",
+      tags: ["React", "Redux", "Firebase"],
+      category: "frontend",
+      github: "https://github.com/maryquiroz/task-manager",
+      demo: "https://task-manager-app.vercel.app"
     },
     {
       id: 4,
-      title: "Portfolio 3D",
-      description: "Sitio web personal con efectos 3D y animaciones avanzadas.",
-      image: "https://via.placeholder.com/600x400/121212/00FF7F?text=Portfolio+3D",
-      tags: ["React", "Three.js", "Framer Motion"],
-      category: "frontend",
-      github: "https://github.com/maryquiroz/portfolio-3d",
-      demo: "https://maryquiroz.com",
+      title: "API RESTful",
+      description: "API para gestionar recursos con autenticación, autorización y documentación completa.",
+      image: "/project4.jpg",
+      tags: ["Node.js", "Express", "MongoDB", "JWT"],
+      category: "backend",
+      github: "https://github.com/maryquiroz/rest-api",
+      demo: "https://api-docs.vercel.app"
     },
     {
       id: 5,
-      title: "Sistema de Análisis de Datos",
-      description: "Aplicación para análisis y visualización de datos con IA para predicciones.",
-      image: "https://via.placeholder.com/600x400/121212/00FF7F?text=Data+Analysis",
-      tags: ["Python", "Django", "Pandas", "React"],
-      category: "fullstack",
-      github: "https://github.com/maryquiroz/data-analysis",
-      demo: "https://data.maryquiroz.com",
+      title: "Aplicación de Clima",
+      description: "App que muestra el clima actual y pronóstico para cualquier ubicación, con interfaz intuitiva.",
+      image: "/project5.jpg",
+      tags: ["React", "API", "CSS"],
+      category: "frontend",
+      github: "https://github.com/maryquiroz/weather-app",
+      demo: "https://weather-app-demo.vercel.app"
     },
     {
       id: 6,
-      title: "Aplicación de Chat en Tiempo Real",
-      description: "Chat con mensajería instantánea, salas y notificaciones.",
-      image: "https://via.placeholder.com/600x400/121212/00FF7F?text=Chat+App",
-      tags: ["React", "Socket.io", "Node.js"],
+      title: "Sistema de Gestión de Contenido",
+      description: "CMS personalizado con editor WYSIWYG, gestión de usuarios y análisis de contenido.",
+      image: "/project6.jpg",
+      tags: ["React", "Node.js", "PostgreSQL"],
       category: "fullstack",
-      github: "https://github.com/maryquiroz/chat-app",
-      demo: "https://chat.maryquiroz.com",
-    },
+      github: "https://github.com/maryquiroz/cms-system",
+      demo: "https://cms-demo.vercel.app"
+    }
   ];
 
-  const filters = [
-    { name: 'Todos', value: 'all' },
-    { name: 'Frontend', value: 'frontend' },
-    { name: 'Backend', value: 'backend' },
-    { name: 'Full Stack', value: 'fullstack' },
-  ];
+  const filterProjects = (category) => {
+    setActiveFilter(category);
+  };
 
   const filteredProjects = activeFilter === 'all' 
     ? projects 
@@ -89,113 +88,111 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="section-title mx-auto w-fit">Mis Proyectos</h2>
+          <h2 className="section-title mx-auto w-fit">{t('projects.title')}</h2>
           <p className="text-light/80 mt-6 max-w-3xl mx-auto">
-            Una selección de mis trabajos más recientes y destacados en desarrollo web.
+            {t('projects.description')}
           </p>
         </motion.div>
 
         {/* Filtros */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {filters.map((filter) => (
+          {['all', 'frontend', 'backend', 'fullstack'].map((category) => (
             <motion.button
-              key={filter.value}
-              onClick={() => setActiveFilter(filter.value)}
-              className={`px-6 py-2 rounded-full transition-all ${
-                activeFilter === filter.value
-                  ? 'bg-primary text-secondary font-medium'
-                  : 'bg-secondary/50 text-light/70 hover:bg-secondary'
+              key={category}
+              onClick={() => filterProjects(category)}
+              className={`px-4 py-2 rounded-md transition-colors ${
+                activeFilter === category 
+                  ? 'bg-primary text-dark font-medium' 
+                  : 'bg-dark/50 text-light/80 hover:bg-dark/70'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {filter.name}
+              {category.charAt(0).toUpperCase() + category.slice(1)}
             </motion.button>
           ))}
         </div>
 
         {/* Proyectos */}
         <motion.div 
-          layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
         >
           {filteredProjects.map((project) => (
             <motion.div
-              layout
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="card group overflow-hidden"
+              className="card overflow-hidden group"
+              variants={{
+                hidden: { y: 20, opacity: 0 },
+                visible: { y: 0, opacity: 1 }
+              }}
             >
-              {/* Imagen del proyecto */}
-              <div className="relative overflow-hidden rounded-lg mb-4 aspect-video">
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  whileHover={{ scale: 1.05 }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
-                  <div className="flex gap-4">
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-secondary/80 p-3 rounded-full text-primary hover:bg-primary hover:text-secondary transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <FaGithub size={20} />
-                    </motion.a>
-                    <motion.a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-secondary/80 p-3 rounded-full text-primary hover:bg-primary hover:text-secondary transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <FaExternalLinkAlt size={20} />
-                    </motion.a>
-                  </div>
+              <div className="relative overflow-hidden aspect-video">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-dark/90 z-10"></div>
+                <div className="bg-gradient-to-br from-primary/20 to-dark/50 absolute inset-0 flex items-center justify-center">
+                  <span className="text-primary text-6xl opacity-20">{project.id}</span>
                 </div>
               </div>
-
-              {/* Información del proyecto */}
-              <h3 className="text-xl font-bold text-light mb-2">{project.title}</h3>
-              <p className="text-light/70 mb-4">{project.description}</p>
               
-              {/* Etiquetas */}
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {project.tags.map((tag) => (
-                  <span 
-                    key={tag} 
-                    className="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full"
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-light group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+                
+                <p className="text-light/70 mb-4 text-sm">
+                  {project.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags.map((tag) => (
+                    <span 
+                      key={tag} 
+                      className="text-xs px-2 py-1 rounded-md bg-dark/50 text-primary/90"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="flex gap-4">
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-sm-outline flex items-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {tag}
-                  </span>
-                ))}
+                    <FaGithub size={16} />
+                    {t('projects.viewCode')}
+                  </motion.a>
+                  <motion.a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-sm-primary flex items-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaExternalLinkAlt size={14} />
+                    {t('projects.viewProject')}
+                  </motion.a>
+                </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Botón para ver más proyectos */}
-        <div className="text-center mt-12">
-          <motion.a
-            href="https://github.com/maryquiroz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline inline-flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaGithub size={20} />
-            Ver Más Proyectos
-          </motion.a>
-        </div>
       </div>
     </section>
   );

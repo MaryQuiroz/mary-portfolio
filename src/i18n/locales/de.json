@@ -4,23 +4,38 @@
       "home": "Startseite",
       "about": "Über mich",
       "projects": "Projekte",
-      "contact": "Kontakt"
+      "contact": "Kontakt",
+      "skills": "Fähigkeiten"
     },
     "hero": {
       "greeting": "Hallo! Ich bin",
       "role": "Webentwicklerin",
-      "description": "Leidenschaftlich daran interessiert, ansprechende und funktionale Web-Erlebnisse zu schaffen."
+      "description": "Leidenschaftlich daran interessiert, ansprechende und funktionale Web-Erlebnisse zu schaffen.",
+      "scrollDown": "Scrollen Sie, um zu entdecken"
     },
     "about": {
       "title": "Über mich",
-      "description": "Ich bin eine Webentwicklerin mit Erfahrung in React, Node.js und UI/UX-Design. Ich liebe es, Probleme zu lösen und elegante Lösungen zu schaffen.",
-      "skills": "Fähigkeiten",
-      "experience": "Erfahrung"
+      "description": "Ich bin eine Webentwicklerin, die leidenschaftlich gerne innovative und funktionale digitale Lösungen erstellt.",
+      "skills": "Webentwicklung",
+      "skillsDescription": "Spezialisiert auf die Erstellung moderner und responsiver Schnittstellen mit React und robusten Backend-Anwendungen.",
+      "experience": "Ausbildung",
+      "experienceDescription": "Abschluss in Frontend-Webentwicklung an der La Salle BCN und Ausbildung in KI und maschinellem Lernen mit Python.",
+      "collaboration": "Zusammenarbeit",
+      "collaborationDescription": "Erfahrung in Agile/Scrum-Umgebungen, die eine rechtzeitige Lieferung von Projekten hoher Qualität gewährleistet.",
+      "fullstack": "Full Stack"
+    },
+    "skills": {
+      "title": "Fähigkeiten",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Werkzeuge",
+      "description": "Meine technischen Fähigkeiten und Werkzeuge"
     },
     "projects": {
       "title": "Projekte",
       "viewProject": "Projekt ansehen",
-      "viewCode": "Code ansehen"
+      "viewCode": "Code ansehen",
+      "description": "Einige meiner neuesten Arbeiten"
     },
     "contact": {
       "title": "Kontakt",
@@ -29,10 +44,14 @@
       "message": "Nachricht",
       "send": "Senden",
       "success": "Nachricht erfolgreich gesendet!",
-      "error": "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten."
+      "error": "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten.",
+      "description": "Haben Sie ein Projekt im Sinn? Lassen Sie uns reden!",
+      "getInTouch": "Kontakt aufnehmen"
     },
     "footer": {
-      "rights": "Alle Rechte vorbehalten"
+      "rights": "Alle Rechte vorbehalten",
+      "madeWith": "Gemacht mit",
+      "by": "von"
     }
   }
 } 
