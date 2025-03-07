@@ -31,9 +31,12 @@ const About = () => {
             className="relative"
           >
             <div className="relative z-10 rounded-lg overflow-hidden border-2 border-primary/20 shadow-xl shadow-primary/10">
-              <div className="aspect-[4/5] bg-gradient-to-br from-secondary to-dark flex items-center justify-center">
-                <span className="text-primary text-9xl opacity-20">MQ</span>
-                {/* Aquí puedes agregar tu foto si lo deseas */}
+              <div className="aspect-[4/5] bg-gradient-to-br from-secondary to-dark flex items-center justify-center overflow-hidden">
+                <img 
+                  src="https://media.licdn.com/dms/image/v2/D4D03AQG6rOafad613Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727018001112?e=1746662400&v=beta&t=VDxrurBJgWnvLla3IXcxjSGivyWIBe2rXjg9r2wvyt0" 
+                  alt="Mary Quiroz" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             
