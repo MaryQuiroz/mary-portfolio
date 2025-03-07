@@ -1,0 +1,177 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { AI_ASSISTANT_CONFIG } from '../config/aiAssistant';
+import { FaRobot, FaTimes, FaChevronUp, FaPaperPlane } from 'react-icons/fa';
+
+const AIAssistant = () => {
+  const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [messages, setMessages] = useState([
+    { role: 'assistant', content: t('ai.welcome', '¡Hola! Soy el asistente virtual de Mary. ¿En qué puedo ayudarte?') }
+  ]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const chatRef = useRef(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const userMessage = { role: 'user', content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
+
+    try {
+      const chatMessages = messages.concat(userMessage);
+
+      const response = await fetch('http://localhost:3001/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messages: chatMessages }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error del servidor:', errorData);
+        throw new Error(errorData.details || 'Error en la respuesta del servidor');
+      }
+
+      const data = await response.json();
+      
+      if (data && data.content) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: data.content }]);
+      } else {
+        throw new Error('Respuesta inválida del servidor');
+      }
+    } catch (error) {
+      console.error('Error al procesar el mensaje:', error);
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: t('ai.error') },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  return (
+    <div 
+      className={`fixed bottom-4 right-4 z-50 ${isMinimized ? 'w-auto' : 'w-96'} transition-all duration-300 ease-in-out`}
+    >
+      {!isOpen ? (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-primary hover:bg-primary-dark text-dark p-4 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 hover:rotate-12 flex items-center justify-center"
+        >
+          <FaRobot className="text-2xl" />
+        </button>
+      ) : (
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 ease-in-out border border-gray-200">
+          <div className="bg-primary text-dark p-4 rounded-t-2xl flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <div className="bg-dark/10 p-2 rounded-full">
+                <FaRobot className="text-xl" />
+              </div>
+              <span className="font-bold text-dark/90">{t('ai.title')}</span>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setIsMinimized(!isMinimized)}
+                className="hover:bg-dark/10 p-2 rounded-full transition-colors duration-300"
+              >
+                <FaChevronUp
+                  className={`transform transition-transform duration-300 text-dark/90 ${
+                    isMinimized ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="hover:bg-dark/10 p-2 rounded-full transition-colors duration-300"
+              >
+                <FaTimes className="text-dark/90" />
+              </button>
+            </div>
+          </div>
+
+          {!isMinimized && (
+            <>
+              <div
+                ref={chatRef}
+                className="h-[450px] overflow-y-auto p-6 space-y-6 bg-gray-100"
+                style={{
+                  backgroundImage: 'radial-gradient(circle at center, #9CA3AF 1px, transparent 1px)',
+                  backgroundSize: '24px 24px'
+                }}
+              >
+                {messages.map((message, index) => (
+                  <div
+                    key={index}
+                    className={`flex ${
+                      message.role === 'user' ? 'justify-end' : 'justify-start'
+                    } animate-fadeIn`}
+                  >
+                    <div
+                      className={`max-w-[80%] p-4 rounded-2xl ${
+                        message.role === 'user'
+                          ? 'bg-primary text-dark font-medium ml-4'
+                          : 'bg-white text-dark/90 shadow-md mr-4 border border-gray-200'
+                      } transform transition-all duration-300 hover:scale-[1.02]`}
+                    >
+                      {message.content}
+                    </div>
+                  </div>
+                ))}
+                {isLoading && (
+                  <div className="flex justify-start animate-fadeIn">
+                    <div className="bg-white shadow-md p-4 rounded-2xl mr-4 flex items-center gap-2 border border-gray-200">
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      </div>
+                      <span className="text-dark/75 font-medium">{t('ai.thinking')}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200 bg-white">
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder={t('ai.placeholder')}
+                    className="flex-1 p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 bg-white text-gray-900 placeholder-gray-500 font-medium"
+                    disabled={isLoading}
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="bg-primary hover:bg-primary-dark text-dark font-medium p-3 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 flex items-center gap-2"
+                  >
+                    <FaPaperPlane className="text-sm" />
+                    <span>{t('ai.send')}</span>
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AIAssistant; 
