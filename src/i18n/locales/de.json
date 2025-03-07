@@ -53,5 +53,12 @@
       "madeWith": "Gemacht mit",
       "by": "von"
     }
+  },
+  "ai": {
+    "title": "Virtueller Assistent",
+    "placeholder": "Nachricht eingeben...",
+    "send": "Senden",
+    "thinking": "Denke nach...",
+    "error": "Entschuldigung, bei der Verarbeitung Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   }
 } 

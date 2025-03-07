@@ -53,5 +53,12 @@
       "madeWith": "Made with",
       "by": "by"
     }
+  },
+  "ai": {
+    "title": "Virtual Assistant",
+    "placeholder": "Type your message...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "error": "Sorry, there was an error processing your message. Please try again."
   }
 } 

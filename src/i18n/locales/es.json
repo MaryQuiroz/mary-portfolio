@@ -52,6 +52,14 @@
       "rights": "Todos los derechos reservados",
       "madeWith": "Hecho con",
       "by": "por"
+    },
+    "ai": {
+      "title": "Asistente Virtual",
+      "placeholder": "Escribe tu mensaje...",
+      "send": "Enviar",
+      "thinking": "Pensando...",
+      "error": "Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.",
+      "welcome": "¡Hola! Soy el asistente virtual de Mary. ¿En qué puedo ayudarte?"
     }
   }
 } 

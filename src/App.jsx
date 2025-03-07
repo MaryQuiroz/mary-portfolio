@@ -7,6 +7,7 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Background3D from './components/Background3D'
+import AIAssistant from './components/AIAssistant'
 import './App.css'
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Projects />
         <Contact />
       </main>
+      <AIAssistant />
       <Footer />
     </>
   )
