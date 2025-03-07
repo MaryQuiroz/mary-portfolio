@@ -1,0 +1,38 @@
+{
+  "translation": {
+    "header": {
+      "home": "Inicio",
+      "about": "Sobre mí",
+      "projects": "Proyectos",
+      "contact": "Contacto"
+    },
+    "hero": {
+      "greeting": "¡Hola! Soy",
+      "role": "Desarrolladora Web",
+      "description": "Apasionada por crear experiencias web atractivas y funcionales."
+    },
+    "about": {
+      "title": "Sobre mí",
+      "description": "Soy una desarrolladora web con experiencia en React, Node.js y diseño UI/UX. Me encanta resolver problemas y crear soluciones elegantes.",
+      "skills": "Habilidades",
+      "experience": "Experiencia"
+    },
+    "projects": {
+      "title": "Proyectos",
+      "viewProject": "Ver proyecto",
+      "viewCode": "Ver código"
+    },
+    "contact": {
+      "title": "Contacto",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "message": "Mensaje",
+      "send": "Enviar",
+      "success": "¡Mensaje enviado con éxito!",
+      "error": "Hubo un error al enviar el mensaje."
+    },
+    "footer": {
+      "rights": "Todos los derechos reservados"
+    }
+  }
+} 

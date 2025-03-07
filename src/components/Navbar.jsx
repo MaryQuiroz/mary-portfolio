@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,11 +24,11 @@ const Navbar = () => {
   }, [scrolled]);
 
   const navLinks = [
-    { name: 'Inicio', href: '#home' },
-    { name: 'Sobre Mí', href: '#about' },
+    { name: t('header.home'), href: '#home' },
+    { name: t('header.about'), href: '#about' },
     { name: 'Habilidades', href: '#skills' },
-    { name: 'Proyectos', href: '#projects' },
-    { name: 'Contacto', href: '#contact' },
+    { name: t('header.projects'), href: '#projects' },
+    { name: t('header.contact'), href: '#contact' },
   ];
 
   return (
@@ -63,7 +66,8 @@ const Navbar = () => {
               ))}
             </ul>
             
-            <div className="flex space-x-4">
+            <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
               <motion.a 
                 href="https://github.com/maryquiroz" 
                 target="_blank" 
@@ -141,7 +145,10 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            <div className="flex space-x-4 mt-6">
+            <div className="mt-6">
+              <LanguageSwitcher />
+            </div>
+            <div className="flex space-x-4 mt-4">
               <a
                 href="https://github.com/maryquiroz"
                 target="_blank"

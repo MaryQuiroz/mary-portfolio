@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere, MeshDistortMaterial } from '@react-three/drei';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="home" className="relative h-screen w-full overflow-hidden flex items-center">
       {/* Fondo con efecto de partículas */}
@@ -20,13 +23,13 @@ const Hero = () => {
           className="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0"
         >
           <h2 className="text-light text-xl md:text-2xl mb-4 font-medium">
-            ¡Hola! Soy
+            {t('hero.greeting')}
           </h2>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
             <span className="gradient-text">Mary Quiroz</span>
           </h1>
           <h3 className="text-xl md:text-2xl lg:text-3xl text-light/90 mb-8">
-            <span className="text-primary">Desarrolladora Web</span> especializada en crear experiencias digitales excepcionales
+            <span className="text-primary">{t('hero.role')}</span> {t('hero.description')}
           </h3>
           <p className="text-light/80 text-lg mb-8 max-w-lg">
             JavaScript | React | Tailwind | Python | IA | SQL | Django
@@ -38,7 +41,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Ver Proyectos
+              {t('projects.viewProject')}
             </motion.a>
             <motion.a 
               href="#contact" 
@@ -46,7 +49,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Contactar
+              {t('header.contact')}
             </motion.a>
           </div>
         </motion.div>

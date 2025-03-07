@@ -1,0 +1,38 @@
+{
+  "translation": {
+    "header": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "hero": {
+      "greeting": "Hello! I'm",
+      "role": "Web Developer",
+      "description": "Passionate about creating engaging and functional web experiences."
+    },
+    "about": {
+      "title": "About Me",
+      "description": "I'm a web developer with experience in React, Node.js, and UI/UX design. I love solving problems and creating elegant solutions.",
+      "skills": "Skills",
+      "experience": "Experience"
+    },
+    "projects": {
+      "title": "Projects",
+      "viewProject": "View Project",
+      "viewCode": "View Code"
+    },
+    "contact": {
+      "title": "Contact",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send",
+      "success": "Message sent successfully!",
+      "error": "There was an error sending your message."
+    },
+    "footer": {
+      "rights": "All rights reserved"
+    }
+  }
+} 
