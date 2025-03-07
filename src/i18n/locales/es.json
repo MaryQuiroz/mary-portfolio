@@ -55,11 +55,11 @@
     },
     "ai": {
       "title": "Asistente Virtual",
+      "welcome": "¡Hola! Soy el asistente virtual de Mary Quiroz. Estoy aquí para ayudarte a conocer más sobre su experiencia como desarrolladora Full Stack y sus proyectos. ¿En qué puedo ayudarte?",
       "placeholder": "Escribe tu mensaje...",
       "send": "Enviar",
       "thinking": "Pensando...",
-      "error": "Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta de nuevo.",
-      "welcome": "¡Hola! Soy el asistente virtual de Mary. ¿En qué puedo ayudarte?"
+      "error": "Lo siento, ha ocurrido un error. Por favor, intenta de nuevo."
     }
   }
 } 
