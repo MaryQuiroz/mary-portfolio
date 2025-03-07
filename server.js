@@ -1,82 +1,64 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { AI_ASSISTANT_CONFIG } from './src/config/aiAssistant.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import Anthropic from '@anthropic-ai/sdk';
 
 dotenv.config();
 
 const app = express();
+const port = 3001;
+
+// Verificar que la clave API esté disponible
+if (!process.env.ANTHROPIC_API_KEY) {
+  console.error('Error: ANTHROPIC_API_KEY no está configurada en las variables de entorno');
+  process.exit(1);
+}
 
 app.use(cors());
 app.use(express.json());
 
-// Verificar que la clave API esté disponible
-const ANTHROPIC_API_KEY = process.env.VITE_ANTHROPIC_API_KEY;
-if (!ANTHROPIC_API_KEY) {
-  console.error('Error: La clave API de Anthropic no está configurada');
-  process.exit(1);
-}
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+});
 
 app.post('/api/chat', async (req, res) => {
   try {
-    console.log('Solicitud recibida:', req.body);
+    const { messages } = req.body;
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-        'accept': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'claude-3-7-sonnet-20250219',
-        max_tokens: 1024,
-        messages: req.body.messages.map(msg => ({
-          role: msg.role === 'system' ? 'assistant' : msg.role,
-          content: msg.content
-        })),
-        system: AI_ASSISTANT_CONFIG.systemPrompt
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Error de Anthropic:', {
-        status: response.status,
-        statusText: response.statusText,
-        data: errorData,
-        headers: response.headers.raw()
-      });
-      throw new Error(`Error de API: ${response.status} - ${errorData}`);
+    if (!messages || !Array.isArray(messages)) {
+      return res.status(400).json({ error: 'Invalid messages format' });
     }
 
-    const data = await response.json();
-    console.log('Respuesta de Anthropic:', data);
-    
-    res.json({
-      role: 'assistant',
-      content: data.content[0].text
+    // Configurar el streaming
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Transfer-Encoding', 'chunked');
+
+    const stream = await anthropic.messages.create({
+      model: "claude-3-opus-20240229",
+      max_tokens: 1024,
+      messages: messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      })),
+      stream: true,
     });
+
+    for await (const chunk of stream) {
+      if (chunk.type === 'content_block_delta' && chunk.delta.text) {
+        res.write(chunk.delta.text);
+      }
+    }
+
+    res.end();
   } catch (error) {
-    console.error('Error en el servidor proxy:', error);
-    res.status(500).json({ 
-      error: 'Error al procesar la solicitud',
-      details: error.message 
-    });
+    console.error('Error:', error);
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Servidor proxy ejecutándose en el puerto ${PORT}`);
-  console.log('Variables de entorno cargadas:', {
-    ANTHROPIC_API_KEY: ANTHROPIC_API_KEY ? '***' + ANTHROPIC_API_KEY.slice(-4) : 'no configurada'
-  });
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+  console.log('API Key status:', process.env.ANTHROPIC_API_KEY ? 'Configurada' : 'No configurada');
 }); 

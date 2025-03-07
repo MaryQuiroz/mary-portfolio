@@ -23,6 +23,7 @@ const AIAssistant = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentStreamedContent, setCurrentStreamedContent] = useState('');
   const chatRef = useRef(null);
 
   const handleSubmit = async (e) => {
@@ -33,10 +34,10 @@ const AIAssistant = () => {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    setCurrentStreamedContent('');
 
     try {
       const chatMessages = messages.concat(userMessage);
-
       const response = await fetch('http://localhost:3001/api/chat', {
         method: 'POST',
         headers: {
@@ -51,13 +52,20 @@ const AIAssistant = () => {
         throw new Error(errorData.details || 'Error en la respuesta del servidor');
       }
 
-      const data = await response.json();
-      
-      if (data && data.content) {
-        setMessages((prev) => [...prev, { role: 'assistant', content: data.content }]);
-      } else {
-        throw new Error('Respuesta inválida del servidor');
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let accumulatedContent = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        
+        const chunk = decoder.decode(value);
+        accumulatedContent += chunk;
+        setCurrentStreamedContent(accumulatedContent);
       }
+
+      setMessages((prev) => [...prev, { role: 'assistant', content: accumulatedContent }]);
     } catch (error) {
       console.error('Error al procesar el mensaje:', error);
       setMessages((prev) => [
@@ -66,6 +74,7 @@ const AIAssistant = () => {
       ]);
     } finally {
       setIsLoading(false);
+      setCurrentStreamedContent('');
     }
   };
 
@@ -73,7 +82,7 @@ const AIAssistant = () => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, currentStreamedContent]);
 
   return (
     <div 
@@ -145,7 +154,16 @@ const AIAssistant = () => {
                     </div>
                   </div>
                 ))}
-                {isLoading && (
+                {currentStreamedContent && (
+                  <div className="flex justify-start animate-fadeIn">
+                    <div className="max-w-[80%] p-4 rounded-2xl bg-white text-dark/90 shadow-md mr-4 border border-gray-200 transform transition-all duration-300 hover:scale-[1.02]">
+                      <ReactMarkdown components={MarkdownComponents}>
+                        {currentStreamedContent}
+                      </ReactMarkdown>
+                    </div>
+                  </div>
+                )}
+                {isLoading && !currentStreamedContent && (
                   <div className="flex justify-start animate-fadeIn">
                     <div className="bg-white shadow-md p-4 rounded-2xl mr-4 flex items-center gap-2 border border-gray-200">
                       <div className="flex gap-1">
