@@ -21,5 +21,9 @@ Mantén un tono conversacional pero profesional y responde en el idioma en que t
   modelConfig: {
     temperature: 0.7,
     maxTokens: 500
-  }
+  },
+
+  apiUrl: process.env.NODE_ENV === 'production' 
+    ? '/api/chat'  // URL relativa en producción
+    : 'http://localhost:3001/api/chat', // URL local para desarrollo
 }; 

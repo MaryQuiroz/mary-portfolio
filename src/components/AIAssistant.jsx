@@ -38,7 +38,7 @@ const AIAssistant = () => {
 
     try {
       const chatMessages = messages.concat(userMessage);
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch(AI_ASSISTANT_CONFIG.apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,9 @@ const AIAssistant = () => {
 
   return (
     <div 
-      className={`fixed bottom-4 right-4 z-50 ${isMinimized ? 'w-auto' : 'w-96'} transition-all duration-300 ease-in-out`}
+      className={`fixed bottom-4 right-4 z-50 ${
+        isMinimized ? 'w-auto' : 'w-full md:w-96'
+      } max-w-[95vw] transition-all duration-300 ease-in-out`}
     >
       {!isOpen ? (
         <button
@@ -128,7 +130,7 @@ const AIAssistant = () => {
             <>
               <div
                 ref={chatRef}
-                className="h-[450px] overflow-y-auto p-6 space-y-6 bg-gray-100"
+                className="h-[50vh] md:h-[450px] overflow-y-auto p-4 md:p-6 space-y-6 bg-gray-100"
                 style={{
                   backgroundImage: 'radial-gradient(circle at center, #9CA3AF 1px, transparent 1px)',
                   backgroundSize: '24px 24px'
