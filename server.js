@@ -68,16 +68,16 @@ Herramientas y otros:
 INFORMACIÓN PERSONAL Y CONTACTO:
 Nombre: Mary Quiroz
 Ubicación: Barcelona, España
-Email: \`maryqr21@gmail.com\`
-WhatsApp: \`+34 637612072\`
+Email: <a href="mailto:maryqr21@gmail.com">maryqr21@gmail.com</a>
+WhatsApp: <a href="tel:+34637612072">+34 637612072</a>
 Portfolio: <a href="https://maryquiroz.github.io/myportfolio/" target="_blank">Ver Portfolio</a>
 LinkedIn: <a href="https://www.linkedin.com/in/maryquiroz/" target="_blank">Ver LinkedIn</a>
 
 FORMATO PARA MOSTRAR CONTACTO:
 Cuando te pregunten por formas de contacto, usa este formato:
 "Puedes contactar con Mary a través de:
-- Email: \`maryqr21@gmail.com\`
-- WhatsApp: \`+34 637612072\`
+- Email: <a href="mailto:maryqr21@gmail.com">maryqr21@gmail.com</a>
+- WhatsApp: <a href="tel:+34637612072">+34 637612072</a>
 - LinkedIn: <a href="https://www.linkedin.com/in/maryquiroz/" target="_blank">Perfil profesional</a>
 - Portfolio: <a href="https://maryquiroz.github.io/myportfolio/" target="_blank">Ver proyectos</a>"
 
@@ -168,8 +168,8 @@ Para tecnologías no listadas:
 
 Para medios de contacto no listados:
 "Lo siento, no tengo información sobre ese medio de contacto. Puedes contactar con Mary a través de:
-- Email: \`maryqr21@gmail.com\`
-- WhatsApp: \`+34 637612072\`
+- Email: <a href="mailto:maryqr21@gmail.com">maryqr21@gmail.com</a>
+- WhatsApp: <a href="tel:+34637612072">+34 637612072</a>
 - LinkedIn: <a href="https://www.linkedin.com/in/maryquiroz/" target="_blank">Perfil profesional</a>
 - Portfolio: <a href="https://maryquiroz.github.io/myportfolio/" target="_blank">Ver proyectos</a>"
 
