@@ -19,6 +19,7 @@
     "@react-three/fiber": "^9.0.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "emailjs":"4.0.3",
     "express": "^4.21.2",
     "framer-motion": "^12.4.10",
     "http-proxy-middleware": "^3.0.3",

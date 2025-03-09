@@ -4,7 +4,7 @@ import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaGithub, FaLinkedin, FaTwitter } 
 import { useTranslation } from 'react-i18next';
 
 const InputField = ({ label, id, type = 'text', value, onChange, placeholder, required = true }) => (
-  <div className="relative">
+  <div className="relative group">
     <input
       type={type}
       id={id}
@@ -13,7 +13,7 @@ const InputField = ({ label, id, type = 'text', value, onChange, placeholder, re
       onChange={onChange}
       required={required}
       placeholder=" "
-      className="peer w-full px-4 py-3 bg-secondary/30 border-2 border-secondary/50 rounded-lg focus:outline-none focus:border-primary/50 text-light placeholder-transparent transition-all duration-300"
+      className="peer w-full px-4 py-3 bg-secondary/20 border-2 border-secondary/30 rounded-lg focus:outline-none focus:border-primary text-light placeholder-transparent transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,127,0.15)] group-hover:border-primary/30"
     />
     <label
       htmlFor={id}
@@ -21,6 +21,7 @@ const InputField = ({ label, id, type = 'text', value, onChange, placeholder, re
     >
       {placeholder}
     </label>
+    <div className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
   </div>
 );
 
@@ -62,10 +63,11 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 bg-dark relative overflow-hidden">
-      {/* Elementos decorativos */}
+      {/* Elementos decorativos mejorados */}
       <div className="absolute top-0 left-0 w-full h-full -z-10 opacity-30">
-        <div className="absolute top-20 left-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-60 h-60 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-40 h-40 bg-primary/10 rounded-full blur-[100px] animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-60 h-60 bg-primary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-40 right-40 w-32 h-32 bg-primary/5 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
       
       <div className="container mx-auto px-4 md:px-6">
@@ -95,21 +97,21 @@ const Contact = () => {
             </h3>
             
             <div className="space-y-6 mb-10">
-              <div className="flex items-start gap-4">
-                <div className="bg-primary/20 p-3 rounded-md text-primary">
-                  <FaEnvelope size={24} />
+              <div className="flex items-start gap-4 group">
+                <div className="bg-primary/20 p-3 rounded-md text-primary ring-1 ring-primary/20 group-hover:shadow-[0_0_15px_rgba(0,255,127,0.15)] transition-all duration-300">
+                  <FaEnvelope size={24} className="group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-light">Email</h4>
                   <a href="mailto:maryqr21@gmail.com" className="text-light/70 hover:text-primary transition-colors">
-                  maryqr21@gmail.com
+                    maryqr21@gmail.com
                   </a>
                 </div>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="bg-primary/20 p-3 rounded-md text-primary">
-                  <FaMapMarkerAlt size={24} />
+              <div className="flex items-start gap-4 group">
+                <div className="bg-primary/20 p-3 rounded-md text-primary ring-1 ring-primary/20 group-hover:shadow-[0_0_15px_rgba(0,255,127,0.15)] transition-all duration-300">
+                  <FaMapMarkerAlt size={24} className="group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-light">Ubicación</h4>
@@ -119,9 +121,9 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="bg-primary/20 p-3 rounded-md text-primary">
-                  <FaPhone size={24} />
+              <div className="flex items-start gap-4 group">
+                <div className="bg-primary/20 p-3 rounded-md text-primary ring-1 ring-primary/20 group-hover:shadow-[0_0_15px_rgba(0,255,127,0.15)] transition-all duration-300">
+                  <FaPhone size={24} className="group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-light">Teléfono</h4>
@@ -132,7 +134,7 @@ const Contact = () => {
               </div>
             </div>
             
-            {/* Redes sociales */}
+            {/* Redes sociales mejoradas */}
             <div>
               <h4 className="text-lg font-semibold text-light mb-4">Redes Sociales</h4>
               <div className="flex gap-4">
@@ -140,8 +142,9 @@ const Contact = () => {
                   href="https://github.com/maryquiroz" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="bg-secondary/50 p-3 rounded-md text-light hover:text-primary hover:bg-secondary/70 transition-colors"
-                  whileHover={{ y: -5 }}
+                  className="bg-secondary/30 p-3 rounded-md text-light hover:text-primary hover:bg-secondary/40 transition-all duration-300 ring-1 ring-primary/10 hover:ring-primary/30 hover:shadow-[0_0_15px_rgba(0,255,127,0.15)]"
+                  whileHover={{ y: -5, scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <FaGithub size={24} />
                 </motion.a>
@@ -149,8 +152,9 @@ const Contact = () => {
                   href="https://linkedin.com/in/maryquiroz" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="bg-secondary/50 p-3 rounded-md text-light hover:text-primary hover:bg-secondary/70 transition-colors"
-                  whileHover={{ y: -5 }}
+                  className="bg-secondary/30 p-3 rounded-md text-light hover:text-primary hover:bg-secondary/40 transition-all duration-300 ring-1 ring-primary/10 hover:ring-primary/30 hover:shadow-[0_0_15px_rgba(0,255,127,0.15)]"
+                  whileHover={{ y: -5, scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <FaLinkedin size={24} />
                 </motion.a>
@@ -158,8 +162,9 @@ const Contact = () => {
                   href="https://twitter.com/maryquiroz" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="bg-secondary/50 p-3 rounded-md text-light hover:text-primary hover:bg-secondary/70 transition-colors"
-                  whileHover={{ y: -5 }}
+                  className="bg-secondary/30 p-3 rounded-md text-light hover:text-primary hover:bg-secondary/40 transition-all duration-300 ring-1 ring-primary/10 hover:ring-primary/30 hover:shadow-[0_0_15px_rgba(0,255,127,0.15)]"
+                  whileHover={{ y: -5, scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <FaTwitter size={24} />
                 </motion.a>
@@ -167,13 +172,13 @@ const Contact = () => {
             </div>
           </motion.div>
           
-          {/* Formulario de contacto */}
+          {/* Formulario de contacto mejorado */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
-            className="bg-dark/50 backdrop-blur-sm p-8 rounded-2xl border-2 border-secondary/20 shadow-xl"
+            className="bg-dark/50 backdrop-blur-sm p-8 rounded-2xl border border-primary/10 shadow-xl hover:shadow-[0_0_30px_rgba(0,255,127,0.1)] transition-all duration-500"
           >
             <form onSubmit={handleSubmit} className="space-y-8">
               <InputField
@@ -191,7 +196,7 @@ const Contact = () => {
                 placeholder={t('contact.email')}
               />
               
-              <div className="relative">
+              <div className="relative group">
                 <textarea
                   id="message"
                   name="message"
@@ -200,7 +205,7 @@ const Contact = () => {
                   required
                   rows="4"
                   placeholder=" "
-                  className="peer w-full px-4 py-3 bg-secondary/30 border-2 border-secondary/50 rounded-lg focus:outline-none focus:border-primary/50 text-light placeholder-transparent resize-none transition-all duration-300"
+                  className="peer w-full px-4 py-3 bg-secondary/20 border-2 border-secondary/30 rounded-lg focus:outline-none focus:border-primary text-light placeholder-transparent resize-none transition-all duration-300 focus:shadow-[0_0_15px_rgba(0,255,127,0.15)] group-hover:border-primary/30"
                 ></textarea>
                 <label
                   htmlFor="message"
@@ -208,6 +213,7 @@ const Contact = () => {
                 >
                   {t('contact.message')}
                 </label>
+                <div className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
               
               <motion.button
@@ -219,7 +225,8 @@ const Contact = () => {
                 whileTap={{ scale: 0.98 }}
                 disabled={isSubmitting}
               >
-                <span className="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-full bg-gradient-to-r from-primary/20 to-transparent group-hover:translate-x-full"></span>
+                <span className="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-full bg-gradient-to-r from-primary/40 via-transparent to-transparent group-hover:translate-x-full"></span>
+                <span className="absolute inset-0 w-full h-full transition duration-300 transform translate-x-full bg-gradient-to-l from-primary/40 via-transparent to-transparent group-hover:-translate-x-full"></span>
                 <div className="relative flex items-center justify-center gap-2">
                   {isSubmitting ? (
                     <>
@@ -232,7 +239,7 @@ const Contact = () => {
                       <motion.span 
                         initial={{ x: 0 }} 
                         whileHover={{ x: 5 }}
-                        className="text-dark"
+                        className="text-dark transition-transform"
                       >
                         →
                       </motion.span>
@@ -241,15 +248,14 @@ const Contact = () => {
                 </div>
               </motion.button>
               
-              {/* Mensaje de estado mejorado */}
               {submitStatus && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`p-4 rounded-lg text-center flex items-center justify-center gap-2 ${
+                  className={`p-4 rounded-lg text-center flex items-center justify-center gap-2 backdrop-blur-sm ${
                     submitStatus === 'success' 
-                      ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
+                      ? 'bg-green-500/10 text-green-400 border border-green-500/20 shadow-[0_0_15px_rgba(0,255,127,0.1)]' 
                       : 'bg-red-500/10 text-red-400 border border-red-500/20'
                   }`}
                 >
