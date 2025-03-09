@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FaGraduationCap, FaLaptopCode, FaUsers } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import profileImage from '../assets/images/profile.jpg';
 
 const About = () => {
   const { t } = useTranslation();
@@ -33,9 +34,10 @@ const About = () => {
             <div className="relative z-10 rounded-lg overflow-hidden border-2 border-primary/20 shadow-xl shadow-primary/10">
               <div className="aspect-[4/5] bg-gradient-to-br from-secondary to-dark flex items-center justify-center overflow-hidden">
                 <img 
-                  src="https://media.licdn.com/dms/image/v2/D4D03AQG6rOafad613Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1727018001112?e=1746662400&v=beta&t=VDxrurBJgWnvLla3IXcxjSGivyWIBe2rXjg9r2wvyt0" 
+                  src={profileImage}
                   alt="Mary Quiroz" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-lg"
+                  loading="lazy"
                 />
               </div>
             </div>
