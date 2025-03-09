@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"  # Puerto para el servidor Express
+      - "5173:5173"  # Puerto para Vite
+    volumes:
+      - .:/app  # Montar el código fuente para desarrollo en tiempo real
+      - /app/node_modules  # Volumen anónimo para node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_HOST=0.0.0.0
+      - HOST=0.0.0.0
+      - PORT=3001
+    stdin_open: true  # docker run -i
+    tty: true        # docker run -t 

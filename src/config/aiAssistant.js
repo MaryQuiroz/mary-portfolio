@@ -23,7 +23,19 @@ Mantén un tono conversacional pero profesional y responde en el idioma en que t
     maxTokens: 500
   },
 
-  apiUrl: process.env.NODE_ENV === 'production' 
-    ? '/api/chat'  // URL relativa en producción
-    : '/api/chat', // URL local para desarrollo
+  // Configuración de la URL de la API según el entorno
+  apiUrl: (() => {
+    if (process.env.NODE_ENV === 'development') {
+      return '/api/chat'; // Desarrollo local con Docker
+    } else if (window.location.hostname === 'localhost') {
+      return 'http://localhost:3001/api/chat'; // Desarrollo local sin Docker
+    } else if (window.location.hostname.includes('mary-portfolio-two.vercel.app')) {
+      return '/api/chat'; // Tu URL específica de Vercel
+    } else if (window.location.hostname === 'maryquiroz.github.io') {
+      // Para GitHub Pages, usar la API de Vercel
+      return 'https://mary-portfolio-two.vercel.app/api/chat';
+    } else {
+      return '/api/chat'; // Fallback para otros entornos
+    }
+  })(),
 }; 

@@ -6,7 +6,7 @@ import Anthropic from '@anthropic-ai/sdk';
 dotenv.config();
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 // Verificar que la clave API esté disponible
 if (!process.env.ANTHROPIC_API_KEY) {
@@ -14,7 +14,18 @@ if (!process.env.ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
-app.use(cors());
+// Configuración de CORS
+app.use(cors({
+  origin: [
+    'https://maryquiroz.github.io',
+    'https://mary-portfolio-two.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3001'
+  ],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 const anthropic = new Anthropic({
