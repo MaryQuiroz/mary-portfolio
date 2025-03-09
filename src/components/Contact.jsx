@@ -3,6 +3,27 @@ import { motion } from 'framer-motion';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
+const InputField = ({ label, id, type = 'text', value, onChange, placeholder, required = true }) => (
+  <div className="relative">
+    <input
+      type={type}
+      id={id}
+      name={id}
+      value={value}
+      onChange={onChange}
+      required={required}
+      placeholder=" "
+      className="peer w-full px-4 py-3 bg-secondary/30 border-2 border-secondary/50 rounded-lg focus:outline-none focus:border-primary/50 text-light placeholder-transparent transition-all duration-300"
+    />
+    <label
+      htmlFor={id}
+      className="absolute left-4 -top-2.5 px-1 text-sm text-light/70 bg-dark peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-light/50 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary transition-all duration-300"
+    >
+      {placeholder}
+    </label>
+  </div>
+);
+
 const Contact = () => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
@@ -152,85 +173,101 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
-            className="card"
+            className="bg-dark/50 backdrop-blur-sm p-8 rounded-2xl border-2 border-secondary/20 shadow-xl"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-light font-medium mb-2">
-                  {t('contact.name')}
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-secondary/50 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-light"
-                  placeholder={t('contact.name')}
-                />
-              </div>
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <InputField
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder={t('contact.name')}
+              />
               
-              <div>
-                <label htmlFor="email" className="block text-light font-medium mb-2">
-                  {t('contact.email')}
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-secondary/50 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-light"
-                  placeholder={t('contact.email')}
-                />
-              </div>
+              <InputField
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder={t('contact.email')}
+              />
               
-              <div>
-                <label htmlFor="message" className="block text-light font-medium mb-2">
-                  {t('contact.message')}
-                </label>
+              <div className="relative">
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows="5"
-                  className="w-full px-4 py-3 bg-secondary/50 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 text-light resize-none"
-                  placeholder={t('contact.message')}
+                  rows="4"
+                  placeholder=" "
+                  className="peer w-full px-4 py-3 bg-secondary/30 border-2 border-secondary/50 rounded-lg focus:outline-none focus:border-primary/50 text-light placeholder-transparent resize-none transition-all duration-300"
                 ></textarea>
+                <label
+                  htmlFor="message"
+                  className="absolute left-4 -top-2.5 px-1 text-sm text-light/70 bg-dark peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-light/50 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary transition-all duration-300"
+                >
+                  {t('contact.message')}
+                </label>
               </div>
               
               <motion.button
                 type="submit"
-                className="btn-primary w-full flex justify-center items-center"
-                whileHover={{ scale: 1.02 }}
+                className={`w-full py-4 px-6 rounded-lg font-medium relative overflow-hidden group ${
+                  isSubmitting ? 'bg-primary/50 cursor-not-allowed' : 'bg-primary hover:bg-primary/90'
+                }`}
+                whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? (
-                  <div className="w-6 h-6 border-2 border-light border-t-transparent rounded-full animate-spin mr-2"></div>
-                ) : null}
-                {isSubmitting ? 'Enviando...' : t('contact.send')}
+                <span className="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-full bg-gradient-to-r from-primary/20 to-transparent group-hover:translate-x-full"></span>
+                <div className="relative flex items-center justify-center gap-2">
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-dark border-t-transparent rounded-full animate-spin"></div>
+                      <span className="text-dark">{t('contact.sending')}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-dark">{t('contact.send')}</span>
+                      <motion.span 
+                        initial={{ x: 0 }} 
+                        whileHover={{ x: 5 }}
+                        className="text-dark"
+                      >
+                        →
+                      </motion.span>
+                    </>
+                  )}
+                </div>
               </motion.button>
               
-              {/* Mensaje de estado */}
+              {/* Mensaje de estado mejorado */}
               {submitStatus && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`p-3 rounded-md text-center ${
+                  exit={{ opacity: 0, y: -10 }}
+                  className={`p-4 rounded-lg text-center flex items-center justify-center gap-2 ${
                     submitStatus === 'success' 
-                      ? 'bg-green-500/20 text-green-300' 
-                      : 'bg-red-500/20 text-red-300'
+                      ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
+                      : 'bg-red-500/10 text-red-400 border border-red-500/20'
                   }`}
                 >
-                  {submitStatus === 'success' 
-                    ? t('contact.success')
-                    : t('contact.error')
-                  }
+                  {submitStatus === 'success' ? (
+                    <>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{t('contact.success')}</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      <span>{t('contact.error')}</span>
+                    </>
+                  )}
                 </motion.div>
               )}
             </form>
