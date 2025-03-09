@@ -1,8 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import cors from 'cors';
-
-// Importar el SYSTEM_PROMPT del servidor
-import { SYSTEM_PROMPT } from '../server.js';
+import { SYSTEM_PROMPT } from './systemPrompt.js';
 
 // Configurar CORS
 const corsMiddleware = cors({
@@ -29,15 +27,15 @@ const runMiddleware = (req, res, fn) => {
 };
 
 export default async function handler(req, res) {
-  // Manejar CORS
-  await runMiddleware(req, res, corsMiddleware);
-
-  // Solo permitir POST
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
   try {
+    // Manejar CORS
+    await runMiddleware(req, res, corsMiddleware);
+
+    // Solo permitir POST
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method not allowed' });
+    }
+
     const { messages } = req.body;
 
     if (!messages || !Array.isArray(messages)) {
@@ -73,7 +71,11 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Error:', error);
     if (!res.headersSent) {
-      res.status(500).json({ error: 'Internal server error', details: error.message });
+      res.status(500).json({ 
+        error: 'Internal server error', 
+        details: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      });
     }
   }
 } 
