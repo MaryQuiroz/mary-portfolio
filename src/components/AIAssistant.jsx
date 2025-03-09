@@ -40,16 +40,12 @@ const AIAssistant = () => {
       const chatMessages = messages.concat(userMessage);
       const response = await fetch(AI_ASSISTANT_CONFIG.apiUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        ...AI_ASSISTANT_CONFIG.fetchConfig,
         body: JSON.stringify({ messages: chatMessages }),
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error del servidor:', errorData);
-        throw new Error(errorData.details || 'Error en la respuesta del servidor');
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const reader = response.body.getReader();
@@ -70,7 +66,10 @@ const AIAssistant = () => {
       console.error('Error al procesar el mensaje:', error);
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: t('ai.error') },
+        { 
+          role: 'assistant', 
+          content: t('ai.error', 'Lo siento, ha ocurrido un error. Por favor, intenta de nuevo.')
+        },
       ]);
     } finally {
       setIsLoading(false);
